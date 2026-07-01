@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aditya Tejpal — Computer Engineering & Software Engineering Intern</title>
+  <meta name="description" content="Aditya Tejpal — Computer Engineering student and Software Engineering Intern. Backend systems, Flutter, FastAPI, and applied AI." />
+
+  <!-- Fonts: VisueltPro substitute (Inter 300/500) + Bradford substitute (Playfair Display 500) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Preload hero image (LCP element) -->
+  <link rel="preload" as="image" href="assets/starting_img.webp" fetchpriority="high" />
+
+  <!-- Mobile browser chrome matches the black canvas -->
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Favicon: black canvas + 3 white bars (Sequel wordmark mark), inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cg fill='%23fff'%3E%3Crect x='9' y='9' width='2' height='14'/%3E%3Crect x='15' y='9' width='2' height='14'/%3E%3Crect x='21' y='9' width='2' height='14'/%3E%3C/g%3E%3C/svg%3E" />
+
+  <!-- Open Graph / Twitter Card — link preview when shared -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Aditya Tejpal — Computer Engineering & Software Engineering Intern" />
+  <meta property="og:description" content="Computer Engineering student building backend systems & applied AI. Software Engineering Intern at Ventus Pharma." />
+  <meta property="og:image" content="https://TODO:your-live-domain/assets/starting_img.webp" />
+  <meta property="og:url" content="https://TODO:your-live-domain/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aditya Tejpal — Computer Engineering & Software Engineering Intern" />
+  <meta name="twitter:description" content="Computer Engineering student building backend systems & applied AI. Software Engineering Intern at Ventus Pharma." />
+  <meta name="twitter:image" content="https://TODO:your-live-domain/assets/starting_img.webp" />
+</head>
+<body>
+
+  <!-- Skip link — keyboard/screen-reader shortcut to main content -->
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- ============== STICKY TOP NAVIGATION (doc component) ============== -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <!-- Logo Lockup: wordmark + 3 vertical bars -->
+      <a href="#top" class="nav__brand" aria-label="Aditya Tejpal — home">
+        Aditya Tejpal
+        <span class="nav__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </a>
+
+      <!-- Desktop menu -->
+      <nav class="nav__menu" aria-label="Primary">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+      </nav>
+
+      <div class="nav__right">
+        <!-- Pill Ghost Button (desktop) -->
+        <button type="button" class="btn btn--ghost" data-contact-open aria-haspopup="dialog" aria-controls="contactModal">Contact</button>
+        <!-- Mobile hamburger toggle -->
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile dropdown menu -->
+      <nav class="nav__mobile" id="navMobile" aria-label="Mobile">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contactModal" role="button" data-contact-open aria-haspopup="dialog" aria-controls="contactModal">Contact</a>
+      </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============== HERO — cinematic full-bleed image ============== -->
+    <section class="hero">
+      <div class="hero__media">
+        <!-- PLACEHOLDER: replace with your own cinematic dark/moody photo
+             (single warm light source, desaturated). Doc: no 3D/illustrations. -->
+        <img src="assets/starting_img.webp" alt="Developer workspace lit by a single warm desk lamp at night" width="1920" height="1080" fetchpriority="high" />
+      </div>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <span class="hero__tag reveal">Portfolio · 2026</span>
+
+        <!-- Bradford display headline -->
+        <h1 class="hero__title reveal" data-delay="1">
+          From thoughtful interfaces to intelligent systems.
+        </h1>
+
+        <p class="hero__sub reveal" data-delay="2">
+          Creating software that's intuitive to use, dependable to scale, and built with intention.
+        </p>
+
+        <div class="hero__actions reveal" data-delay="3">
+          <!-- Pill Primary Button -->
+          <a href="https://drive.google.com/file/d/1Bv9c6rL7TmfTHCE4bI-rn43a5cQvrH3T/view?usp=drive_link" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+            Download Resume
+            <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <!-- Pill Ghost Button -->
+          <a href="#projects" class="btn btn--ghost">View projects</a>
+        </div>
+
+        <div class="hero__meta reveal" data-delay="4">
+          <span>B.Tech Computer Engineering</span>
+          <span>Available for full-time opportunities</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== EXPERIENCE — centered editorial list ============== -->
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="head">
+          <span class="eyebrow reveal">02 — Experience</span>
+          <h2 class="head__title reveal" data-delay="1">Professional experience.</h2>
+          <p class="head__lead reveal" data-delay="2">
+            Hands-on engineering on production ERP systems — auth, ORM, migrations,
+            and containerization.
+          </p>
+        </div>
+
+        <div class="exp-list">
+          <!-- Entry 1: two-column editorial row (anchored role/org LEFT, detail RIGHT) -->
+          <article class="exp reveal">
+            <div class="exp__head">
+              <h3 class="exp__role">Software Engineering Intern — ERP Systems</h3>
+              <p class="exp__org">Ventus Pharma Pvt. Ltd.</p>
+              <div class="exp__stack">
+                <span class="badge">FastAPI</span>
+                <span class="badge">PostgreSQL</span>
+                <span class="badge">SQLAlchemy</span>
+                <span class="badge">Alembic</span>
+                <span class="badge">Docker</span>
+                <span class="badge">RBAC</span>
+              </div>
+            </div>
+
+            <ul class="exp__points">
+              <li>Developed backend services for a modular ERP platform using <span class="exp__em">FastAPI</span>, PostgreSQL, SQLAlchemy, and Alembic — supporting accounting, purchase, inventory, and user-management workflows.</li>
+              <li>Implemented secure authentication via <span class="exp__em">OAuth2 + JWT</span>, refresh tokens, SendGrid/SMTP-based email verification, and RBAC for multi-user access.</li>
+              <li>Led the <span class="exp__em">Accounting Module</span>: REST APIs and database models for journal entries, transactions, ledgers, and reporting.</li>
+              <li>Owned the <span class="exp__em">Purchase Module</span>: end-to-end REST APIs for purchase orders, supplier onboarding, vendor query management, goods receipt tracking, and purchase-return workflows.</li>
+              <li>Integrated FastAPI services with a Next.js ERP frontend; managed <span class="exp__em">Docker</span>-based dev and deployment environments.</li>
+              <li>Designed scalable PostgreSQL schemas and maintained migrations with Alembic for cross-module data consistency.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== PROJECTS — alternating image-forward rows (gallery signature) ============== -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="head">
+          <span class="eyebrow reveal">03 — Projects</span>
+          <h2 class="head__title reveal" data-delay="1">Selected work.</h2>
+          <p class="head__lead reveal" data-delay="2">
+            Full-stack builds across mobile product surfaces and AI voice intelligence —
+            each shipped with measurable outcomes.
+          </p>
+        </div>
+
+        <div class="work-list">
+          <!-- Project 1: Uniphar Biotech — image LEFT -->
+          <article class="work reveal">
+            <!-- Image-forward Editorial Image Card (doc): full-bleed photo,
+                 10px radius, shadow-xl, headline + hook overlaid bottom-left. -->
+            <div class="work__media">
+              <div class="card__media">
+                <img src="assets/uniphar_img.webp" alt="Uniphar Biotech — Pharma Company Management Platform" width="1200" height="1440" loading="lazy" />
+              </div>
+              <div class="card__scrim" aria-hidden="true"></div>
+              <span class="card__badge">Client</span>
+              <div class="work__overlay">
+                <h3 class="card__title">Uniphar Biotech</h3>
+                <p class="card__hook">Pharma Company catalog app &amp; admin panel</p>
+              </div>
+            </div>
+            <!-- Detail column — supporting text, narrow measure -->
+            <div class="work__detail">
+              <p class="card__stack">Flutter · Riverpod · Supabase · Cloudflare R2</p>
+              <p class="card__desc">
+                Client project — a production-ready promotional catalog app for a Pharma
+                company, paired with an admin panel for RBAC, content management, and secure
+                media uploads. Available on Google Play.
+              </p>
+              <ul class="card__points">
+                <li>Flutter + Riverpod for scalable state management across the catalog.</li>
+                <li>Supabase Auth with Resend OTP; complete onboarding &amp; session flows.</li>
+                <li>Supabase Edge Functions for secure uploads; Cloudflare R2 object storage.</li>
+                <li>Optimized data fetching with client-side caching for offline-capable browsing.</li>
+                <li>Firebase Cloud Messaging for push notifications and PostHog for engagement analytics.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Project 2: DeepLogix — image RIGHT (CSS alternation) -->
+          <article class="work reveal" data-delay="1">
+            <div class="work__media">
+              <div class="card__media">
+                <!-- PLACEHOLDER: swap for a real dark/moody audio/tech photo -->
+                <img src="assets/deeplogix.webp" alt="DeepLogix — AI Voice Intelligence platform" width="1200" height="1440" loading="lazy" />
+              </div>
+              <div class="card__scrim" aria-hidden="true"></div>
+              <span class="card__badge">AI</span>
+              <div class="work__overlay">
+                <h3 class="card__title">DeepLogix</h3>
+                <p class="card__hook">AI voice intelligence pipeline</p>
+              </div>
+            </div>
+            <div class="work__detail">
+              <p class="card__stack">FastAPI · Whisper · BERT · GPT · BART</p>
+              <p class="card__desc">
+                An end-to-end AI pipeline converting raw speech into transcripts, emotion
+                predictions, semantic summaries, and searchable conversation history.
+              </p>
+              <ul class="card__points">
+                <li>Whisper STT, BERT emotion classification, BART abstractive summaries.</li>
+                <li>Asynchronous FastAPI services for audio processing &amp; AI inference.</li>
+                <li>Flutter + Firebase for real-time transcript visualization &amp; analytics.</li>
+                <li>87% emotion detection accuracy and 1.4× faster transcription throughput.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== METRICS — achromatic quantified-credibility strip ============== -->
+    <!-- Pure type on void black (no card/shadow/radius). Numbers in Bradford (the
+         system's authority weight), labels in VisueltPro 300 uppercase meta. -->
+    <section class="metrics" aria-label="Selected outcomes">
+      <div class="container">
+        <div class="metrics__row reveal">
+          <div class="metric">
+            <span class="metric__value">87%</span>
+            <span class="metric__label">Emotion detection accuracy</span>
+          </div>
+          <div class="metric">
+            <span class="metric__value">1.4&times;</span>
+            <span class="metric__label">Faster transcription throughput</span>
+          </div>
+          <div class="metric">
+            <span class="metric__value">Play&nbsp;Store</span>
+            <span class="metric__label">Uniphar Biotech app — available now</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== SKILLS — Pill Category Badges (achromatic) ============== -->
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="head">
+          <span class="eyebrow reveal">04 — Skills</span>
+          <h2 class="head__title reveal" data-delay="1">Toolbox.</h2>
+          <p class="head__lead reveal" data-delay="2">
+            The stack behind the work — grouped by domain.
+          </p>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group__label">Languages</p>
+          <div class="skill-badges">
+            <span class="badge">Python</span>
+            <span class="badge">SQL</span>
+            <span class="badge">C++</span>
+            <span class="badge">R</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group__label">Backend</p>
+          <div class="skill-badges">
+            <span class="badge">FastAPI</span>
+            <span class="badge">REST APIs</span>
+            <span class="badge">OAuth2</span>
+            <span class="badge">JWT</span>
+            <span class="badge">PostgreSQL</span>
+            <span class="badge">MySQL</span>
+            <span class="badge">SQLAlchemy</span>
+            <span class="badge">Alembic</span>
+            <span class="badge">Async Processing</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group__label">AI &amp; Applied ML</p>
+          <div class="skill-badges">
+            <span class="badge">NLP</span>
+            <span class="badge">Hybrid RAG</span>
+            <span class="badge">LLM Fine-tuning</span>
+            <span class="badge">Agentic Workflows</span>
+            <span class="badge">Embeddings &amp; Semantic Search</span>
+            <span class="badge">Whisper (STT)</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group__label">Frontend &amp; Mobile</p>
+          <div class="skill-badges">
+            <span class="badge">Flutter</span>
+            <span class="badge">Riverpod</span>
+            <span class="badge">Next.js</span>
+            <span class="badge">FlutterFlow</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group__label">Cloud &amp; Tooling</p>
+          <div class="skill-badges">
+            <span class="badge">Docker</span>
+            <span class="badge">Git</span>
+            <span class="badge">Linux</span>
+            <span class="badge">Supabase</span>
+            <span class="badge">Firebase</span>
+            <span class="badge">Cloudflare R2</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group__label">Data &amp; Visualization</p>
+          <div class="skill-badges">
+            <span class="badge">Pandas</span>
+            <span class="badge">NumPy</span>
+            <span class="badge">Power BI</span>
+            <span class="badge">Tableau</span>
+            <span class="badge">Plotly</span>
+            <span class="badge">Seaborn</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== EDUCATION — centered editorial list ============== -->
+    <section id="education" class="section">
+      <div class="container">
+        <div class="head">
+          <span class="eyebrow reveal">05 — Education</span>
+          <h2 class="head__title reveal" data-delay="1">Academic background.</h2>
+          <p class="head__lead reveal" data-delay="2">
+            Formal training in computer engineering, data science, and the sciences —
+            from school through to a research-oriented B.Tech programme.
+          </p>
+        </div>
+
+        <div class="edu-list">
+          <article class="edu reveal">
+            <h3 class="edu__school">Thapar Institute of Engineering &amp; Technology</h3>
+            <p class="edu__degree">Bachelor of Technology in Computer Engineering</p>
+            <p class="edu__meta">Patiala, Punjab · July 2022 – Present</p>
+          </article>
+
+          <article class="edu reveal">
+            <h3 class="edu__school">Government Model Sr. Secondary School</h3>
+            <p class="edu__degree">Class 12 — Science, 91.4%</p>
+            <p class="edu__meta">Chandigarh · April 2020 – March 2022</p>
+          </article>
+
+          <article class="edu reveal">
+            <h3 class="edu__school">Hansraj Public School</h3>
+            <p class="edu__degree">Class 10 — 93.6%</p>
+            <p class="edu__meta">Panchkula, Haryana · April 2018 – March 2020</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== CERTIFICATIONS — centered editorial list ============== -->
+    <section id="certifications" class="section">
+      <div class="container">
+        <div class="head">
+          <span class="eyebrow reveal">06 — Certifications</span>
+          <h2 class="head__title reveal" data-delay="1">Verified credentials.</h2>
+          <p class="head__lead reveal" data-delay="2">
+            Coursera-backed specialisations across data science, machine learning,
+            NLP, and business intelligence.
+          </p>
+        </div>
+
+        <div class="cert-grid">
+          <article class="cert reveal">
+            <h3 class="cert__title">Data Science Specialization</h3>
+            <p class="cert__issuer">Johns Hopkins University — Coursera</p>
+            <div class="cert__tags">
+              <span class="badge">R</span>
+              <span class="badge">ggplot2</span>
+              <span class="badge">EDA</span>
+            </div>
+          </article>
+
+          <article class="cert reveal" data-delay="1">
+            <h3 class="cert__title">Machine Learning</h3>
+            <p class="cert__issuer">Coursera</p>
+            <div class="cert__tags">
+              <span class="badge">TensorFlow</span>
+              <span class="badge">Image Classification</span>
+              <span class="badge">Object Localization</span>
+            </div>
+          </article>
+
+          <article class="cert reveal">
+            <h3 class="cert__title">NLP &amp; Text Analytics</h3>
+            <p class="cert__issuer">Coursera</p>
+            <div class="cert__tags">
+              <span class="badge">Sentiment Analysis</span>
+              <span class="badge">Web Scraping</span>
+              <span class="badge">Python</span>
+            </div>
+          </article>
+
+          <article class="cert reveal" data-delay="1">
+            <h3 class="cert__title">BI &amp; Visualization</h3>
+            <p class="cert__issuer">Coursera</p>
+            <div class="cert__tags">
+              <span class="badge">Power BI</span>
+              <span class="badge">Seaborn</span>
+              <span class="badge">Box Office Analytics</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== INVERTED LIGHT PANEL (doc: one per page max) ============== -->
+    <section class="panel">
+      <div class="panel__inner reveal">
+        <span class="panel__eyebrow">Let's build</span>
+        <h2 class="panel__title">Have a system in mind?</h2>
+        <p class="panel__lead">
+          Open to full-time opportunities across backend engineering, applied AI,
+          and full-stack product work — happy to work remotely.
+        </p>
+        <!-- Pill Inverted Button -->
+        <button type="button" class="btn btn--inverted" data-contact-open aria-haspopup="dialog" aria-controls="contactModal">
+          Get in touch
+          <span class="btn__arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER — Logo Lockup + links ============== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="#top" class="footer__brand">
+        Aditya Tejpal
+        <span class="nav__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </a>
+      <p class="footer__copy">© 2026 — India</p>
+      <div class="footer__links">
+        <button type="button" class="footer__link" data-contact-open aria-haspopup="dialog" aria-controls="contactModal">Email</button>
+        <a href="https://github.com/Aditya8123" class="footer__link" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://drive.google.com/file/d/1Bv9c6rL7TmfTHCE4bI-rn43a5cQvrH3T/view?usp=drive_link" class="footer__link" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============== CONTACT MODAL — Formspree-powered contact form ============== -->
+  <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-describedby="contactLead" hidden>
+    <div class="modal__backdrop" data-contact-close aria-hidden="true"></div>
+
+    <div class="modal__panel" role="document">
+      <button type="button" class="modal__close" data-contact-close aria-label="Close contact form">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <div class="modal__head">
+        <span class="modal__eyebrow">07 — Contact</span>
+        <h2 class="modal__title" id="contactTitle">Let&rsquo;s talk.</h2>
+        <p class="modal__lead" id="contactLead">
+          Tell me about the role, the system, or the idea &mdash; I read everything.
+        </p>
+      </div>
+
+      <!-- novalidate: we run custom achromatic validation; native POST still goes to Formspree. -->
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xaqgdkvb" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New contact from portfolio" />
+        <!-- Formspree success: redirect back here with #sent so the modal re-opens in success state. -->
+        <input type="hidden" name="_next" value="https://TODO:your-live-domain/index.html#sent" />
+        <!-- Formspree honeypot (anti-spam) — hidden from users -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="contact-form__hp" aria-hidden="true" />
+
+        <!-- Row 1: Name + Email (paired ≥640px) -->
+        <div class="field-row">
+          <div class="field">
+            <label class="field__label" for="cf-name">Name <span class="field__req" aria-hidden="true">*</span></label>
+            <input class="field__input" id="cf-name" name="name" type="text" autocomplete="name" required
+                   aria-required="true" aria-describedby="cf-name-err" />
+            <p class="field__error" id="cf-name-err" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="cf-email">Email <span class="field__req" aria-hidden="true">*</span></label>
+            <input class="field__input" id="cf-email" name="email" type="email" autocomplete="email" required
+                   aria-required="true" aria-describedby="cf-email-err" />
+            <p class="field__error" id="cf-email-err" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <!-- Row 2: Organization + Subject (paired ≥640px) -->
+        <div class="field-row">
+          <div class="field">
+            <label class="field__label" for="cf-org">Organization / Company</label>
+            <input class="field__input" id="cf-org" name="organization" type="text" autocomplete="organization" />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="cf-subject">Subject</label>
+            <input class="field__input" id="cf-subject" name="subject" type="text" />
+          </div>
+        </div>
+
+        <!-- Message (full width) -->
+        <div class="field">
+          <label class="field__label" for="cf-message">Message <span class="field__req" aria-hidden="true">*</span></label>
+          <textarea class="field__input field__input--area" id="cf-message" name="message" rows="5" maxlength="500" required
+                    aria-required="true" aria-describedby="cf-message-err"></textarea>
+          <div class="field__meta">
+            <p class="field__error" id="cf-message-err" aria-live="polite"></p>
+            <p class="field__counter" id="cf-message-count" aria-live="off">0 / 500</p>
+          </div>
+        </div>
+
+        <!-- Live status announcer (polite) — used for sending feedback -->
+        <p class="contact-form__status" id="contactStatus" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="btn btn--primary contact-form__submit" id="contactSubmit" data-label-sending="Sending&hellip;">
+          <span class="contact-form__label">Send message</span>
+          <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        </button>
+      </form>
+
+      <!-- Success view — shown after Formspree redirects back with #sent -->
+      <div class="contact-success" id="contactSuccess" hidden>
+        <span class="contact-success__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>
+        </span>
+        <h2 class="contact-success__title">Message sent.</h2>
+        <p class="contact-success__lead">Thanks for reaching out &mdash; I&rsquo;ll get back to you, typically within 48 hours.</p>
+        <button type="button" class="btn btn--ghost contact-success__close" data-contact-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll reveal + mobile nav toggle -->
+  <script>
+    (function () {
+      // ---- Scroll reveal ----
+      var items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        items.forEach(function (el) { el.classList.add('is-visible'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        items.forEach(function (el) { io.observe(el); });
+      }
+
+      // ---- Mobile nav toggle ----
+      var nav = document.getElementById('nav');
+      var toggle = document.getElementById('navToggle');
+      var mobile = document.getElementById('navMobile');
+      if (nav && toggle && mobile) {
+        function setOpen(open) {
+          nav.classList.toggle('is-open', open);
+          toggle.classList.toggle('is-open', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        toggle.addEventListener('click', function () {
+          setOpen(!nav.classList.contains('is-open'));
+        });
+        // Close when a mobile link is tapped
+        mobile.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () { setOpen(false); });
+        });
+        // Close when clicking outside the nav
+        document.addEventListener('click', function (e) {
+          if (nav.classList.contains('is-open') && !nav.contains(e.target)) {
+            setOpen(false);
+          }
+        });
+        // Close on Escape
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') setOpen(false);
+        });
+        // Close on scroll (prevents the open menu from covering content)
+        window.addEventListener('scroll', function () {
+          if (nav.classList.contains('is-open')) setOpen(false);
+        }, { passive: true });
+
+        // ---- Frosted nav on scroll ----
+        // Keeps white nav text legible when the light linen panel scrolls under
+        // the otherwise-transparent fixed bar; stays transparent over the hero.
+        function onScroll() {
+          nav.classList.toggle('is-scrolled', window.scrollY > 40);
+        }
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+    })();
+
+    // ---- Contact modal ----
+    (function () {
+      var modal = document.getElementById('contactModal');
+      if (!modal) return;
+      var panel = modal.querySelector('.modal__panel');
+      var form = document.getElementById('contactForm');
+      var successView = document.getElementById('contactSuccess');
+      var statusEl = document.getElementById('contactStatus');
+      var submitBtn = document.getElementById('contactSubmit');
+      var submitLabel = submitBtn ? submitBtn.querySelector('.contact-form__label') : null;
+      var messageEl = document.getElementById('cf-message');
+      var messageCount = document.getElementById('cf-message-count');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var lastFocused = null;
+      var OPEN_MS = 260;
+      var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // --- Validation (achromatic: signals via border weight + text, never hue) ---
+      function setError(input, msg) {
+        var field = input.closest('.field');
+        var err = document.getElementById(input.getAttribute('aria-describedby'));
+        if (msg) {
+          field.classList.add('is-invalid');
+          input.setAttribute('aria-invalid', 'true');
+          if (err) err.textContent = msg;
+        } else {
+          field.classList.remove('is-invalid');
+          input.removeAttribute('aria-invalid');
+          if (err) err.textContent = '';
+        }
+      }
+      function validateField(input) {
+        var val = (input.value || '').trim();
+        if (input.required && !val) { setError(input, 'Required'); return false; }
+        if (val && input.type === 'email' && !EMAIL_RE.test(val)) { setError(input, 'Enter a valid email'); return false; }
+        setError(input, ''); return true;
+      }
+      var requiredFields = form ? form.querySelectorAll('[required]') : [];
+      Array.prototype.forEach.call(requiredFields, function (input) {
+        input.addEventListener('blur', function () { validateField(input); });
+        input.addEventListener('input', function () {
+          if (input.closest('.field').classList.contains('is-invalid')) validateField(input);
+        });
+      });
+
+      // --- Char counter (Message) ---
+      function updateCount() {
+        if (messageEl && messageCount) {
+          var n = (messageEl.value || '').length;
+          messageCount.textContent = n + ' / 500';
+        }
+      }
+      if (messageEl) { messageEl.addEventListener('input', updateCount); updateCount(); }
+
+      function announce(msg) { if (statusEl) statusEl.textContent = msg || ''; }
+
+      // --- Submit: custom validate → sending state → native POST (no fetch) ---
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var firstInvalid = null, ok = true;
+          Array.prototype.forEach.call(requiredFields, function (input) {
+            if (!validateField(input)) { ok = false; if (!firstInvalid) firstInvalid = input; }
+          });
+          if (!ok) {
+            announce('Please complete the required fields.');
+            if (firstInvalid) { try { firstInvalid.focus(); } catch (e2) {} }
+            return;
+          }
+          // Sending state + double-submit guard
+          if (submitBtn) { submitBtn.classList.add('is-sending'); submitBtn.disabled = true; }
+          if (submitLabel && submitBtn) submitLabel.innerHTML = submitBtn.getAttribute('data-label-sending') || 'Sending&hellip;';
+          announce('Sending your message\u2026');
+          // Allow the UI to paint the sending state before the native navigation fires.
+          window.setTimeout(function () { form.submit(); }, 60);
+        });
+      }
+
+      function showSuccess() {
+        if (form) form.style.display = 'none';
+        if (successView) successView.hidden = false;
+        if (submitBtn) { submitBtn.classList.remove('is-sending'); submitBtn.disabled = false; }
+        if (submitLabel) submitLabel.textContent = 'Send message';
+        announce('');
+      }
+
+      // --- Open / close (preserved from original) ---
+      function open(trigger) {
+        lastFocused = trigger || document.activeElement;
+        modal.hidden = false;
+        void modal.offsetWidth; // reflow → entrance transition runs
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        var target = successView && !successView.hidden
+          ? successView.querySelector('button, a[href]')
+          : panel.querySelector('input, textarea, button');
+        if (target) { try { target.focus(); } catch (e) {} }
+      }
+      function close() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        var done = function () {
+          modal.hidden = true;
+          if (lastFocused && typeof lastFocused.focus === 'function') {
+            try { lastFocused.focus(); } catch (e) {}
+          }
+        };
+        if (reduce) { done(); } else { window.setTimeout(done, OPEN_MS); }
+      }
+
+      document.querySelectorAll('[data-contact-open]').forEach(function (el) {
+        el.addEventListener('click', function (e) { e.preventDefault(); open(el); });
+      });
+      modal.querySelectorAll('[data-contact-close]').forEach(function (el) {
+        el.addEventListener('click', close);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (!modal.hidden && e.key === 'Escape') { e.preventDefault(); close(); }
+      });
+
+      // Lightweight focus trap within the panel
+      panel.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab' || modal.hidden) return;
+        var f = Array.prototype.slice.call(
+          panel.querySelectorAll('a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])')
+        ).filter(function (n) { return n.offsetParent !== null; });
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+
+      // --- On-load: Formspree redirected back with #sent → show success state ---
+      if (window.location.hash === '#sent') {
+        showSuccess();
+        open(null);
+        // Clear the hash so a refresh doesn't re-trigger the success state.
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1593 @@
+/* ============================================================
+   Aditya Tejpal — Developer Portfolio
+   Design system: Sequel (DESIGN.md) — cinematic dark gallery.
+   100% achromatic: black canvas, white signal, linen warm contrast.
+   No hue anywhere. Radii are binary: 10px cards / 9999px pills.
+   Shadows ONLY on image cards + floating buttons — never text/nav.
+   Responsive: mobile-first → 640 → 768 → 1024 → 1280 → 1536.
+   ============================================================ */
+
+:root {
+  /* Colors — verbatim from doc :root block */
+  --color-void-black: #000000;
+  --color-carbon: #202020;
+  --color-graphite: #333333;
+  --color-bone: #c0c0c0;
+  --color-smoke: #999999;
+  --color-ash: #b3b3b3;
+  --color-fog: #cccccc;
+  --color-chalk: #ffffff;
+  --color-linen: #f5f5f0;
+
+  /* Typography — Font Families
+     Doc substitutes: VisueltPro → Inter (300/500), Bradford → serif */
+  --font-visueltpro: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-bradford: 'Bradford', 'Playfair Display', ui-serif, Georgia, Cambria, "Times New Roman", serif;
+
+  /* Typography — Scale (verbatim) */
+  --text-caption: 12px;
+  --leading-caption: 1.5;
+  --tracking-caption: 0.36px;
+  --text-body-sm: 14px;
+  --leading-body-sm: 1.5;
+  --tracking-body-sm: -0.28px;
+  --text-body: 18px;
+  --leading-body: 1.4;
+  --tracking-body: -0.36px;
+  --text-subheading: 22px;
+  --leading-subheading: 1.4;
+  --tracking-subheading: -0.44px;
+  --text-heading: 32px;
+  --leading-heading: 1.2;
+  --tracking-heading: -1.6px;
+  --text-heading-lg: 58px;
+  --leading-heading-lg: 1.2;
+  --tracking-heading-lg: -2.9px;
+  --text-display: 128px;
+  --leading-display: 1;
+  --tracking-display: -6.4px;
+
+  /* Typography — Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* Spacing */
+  --spacing-unit: 4px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-128: 128px;
+
+  /* Layout */
+  --page-max-width: 1280px;
+  --section-gap: 96px;
+  --card-padding: 19px;
+  --element-gap: 16px;
+
+  /* Border Radius — BINARY: cards/images 10px, pills 9999px */
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+  --radius-cards: 10px;
+  --radius-badges: 9999px;
+  --radius-images: 10px;
+  --radius-buttons: 9999px;
+
+  /* Shadows — used ONLY on image cards + floating buttons */
+  --shadow-xl:
+    rgba(0, 0, 0, 0.35) 0px 10px 30px 0px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset;
+  --shadow-lg: rgba(0, 0, 0, 0.15) 0px 4px 20px 0px;
+
+  /* Surfaces */
+  --surface-void: #000000;
+  --surface-carbon: #202020;
+  --surface-graphite: #333333;
+  --surface-linen: #f5f5f0;
+
+  /* Fluid spacing — scales section padding with viewport */
+  --section-pad: clamp(64px, 9vw, 128px);
+  --gutter: clamp(20px, 5vw, 48px);
+}
+
+/* ============================================================
+   Reset & base
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* Firefox scrollbar — matches the webkit graphite-on-black treatment below */
+  scrollbar-color: var(--color-graphite) var(--color-void-black);
+}
+
+/* Offset anchor scroll by the 64px sticky nav height */
+[id] {
+  scroll-margin-top: 64px;
+}
+
+body {
+  background-color: var(--color-void-black);
+  color: var(--color-chalk);
+  font-family: var(--font-visueltpro);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-light); /* doc: 300 for body */
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--color-chalk);
+  color: var(--color-void-black);
+}
+
+/* Scrollbar — pure black + graphite thumb */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-graphite);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-void-black);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* ============================================================
+   Accessibility — focus rings + skip link
+   Visible keyboard focus only (focus-visible). Achromatic outline
+   (not shadow) to stay within doc's "shadows only on cards/buttons".
+   ============================================================ */
+
+/* Remove the default outline everywhere; restore it for keyboard nav. */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-chalk);
+  outline-offset: 3px;
+  border-radius: 2px; /* follows card radius without leaking onto pills */
+}
+/* On the light linen panel, switch the ring to black so it stays visible. */
+.panel :focus-visible {
+  outline-color: var(--color-void-black);
+}
+
+/* Skip link — hidden off-screen until focused, then slides in as a pill */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  transform: translateY(-160%);
+  background: var(--color-chalk);
+  color: var(--color-void-black);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg); /* floating control — shadow on-spec */
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Layout helpers
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-pad);
+}
+
+/* Centered Headline Block — doc layout: centered, narrow measure */
+.head {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+  margin-bottom: var(--spacing-20);
+}
+
+/* Bradford section headline — fluid scaling */
+.head__title {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(36px, 6vw, var(--text-heading-lg));
+  line-height: var(--leading-heading-lg);
+  letter-spacing: var(--tracking-heading-lg);
+  color: var(--color-chalk);
+}
+
+.head__lead {
+  margin-top: var(--spacing-24);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  color: var(--color-bone);
+  max-width: 52ch;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   Sticky Top Navigation (doc component)
+   Transparent over #000, 64px, no bg fill, no border-bottom.
+   ============================================================ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 64px;
+  background: transparent;
+  /* Transparent hairline that resolves to graphite once scrolled (no reflow). */
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Frosted backdrop once scrolled past the hero — keeps white nav text legible
+   over the light linen panel while staying near-invisible on dark sections. */
+.nav.is-scrolled {
+  background: rgba(0, 0, 0, 0.55);
+  border-bottom-color: var(--color-graphite);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+}
+/* No backdrop-filter support → fall back to a stronger opaque fill. */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .nav.is-scrolled {
+    background: rgba(0, 0, 0, 0.88);
+  }
+}
+
+.nav__inner {
+  height: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+}
+
+/* Logo Lockup — wordmark + 3 vertical bars (mark) */
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-regular);
+  font-size: clamp(16px, 2.5vw, 20px);
+  letter-spacing: -0.02em;
+  color: var(--color-chalk);
+  white-space: nowrap;
+}
+
+.nav__bars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 14px;
+}
+.nav__bars span {
+  width: 2px;
+  height: 14px;
+  background: var(--color-chalk);
+  display: block;
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+/* Desktop menu */
+.nav__menu {
+  display: none;
+  align-items: center;
+  gap: clamp(20px, 3vw, 32px);
+}
+.nav__menu a {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  color: var(--color-bone);
+  opacity: 0.7;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+.nav__menu a:hover {
+  opacity: 1;
+  color: var(--color-chalk);
+}
+
+/* Hamburger — mobile only */
+.nav__toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-graphite);
+  padding: 0 11px;
+}
+.nav__toggle span {
+  display: block;
+  height: 1.5px;
+  width: 100%;
+  background: var(--color-chalk);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav__toggle.is-open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav__toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav__toggle.is-open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile dropdown menu */
+.nav__mobile {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: var(--color-void-black);
+  border-bottom: 1px solid var(--color-graphite);
+  padding: var(--spacing-16) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  transform: translateY(-8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+}
+.nav.is-open .nav__mobile {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+.nav__mobile a {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-body);
+  color: var(--color-bone);
+  padding: var(--spacing-12) 0;
+  border-bottom: 1px solid var(--surface-graphite);
+}
+.nav__mobile a:last-child {
+  border-bottom: none;
+}
+.nav__mobile a:hover {
+  color: var(--color-chalk);
+}
+
+@media (min-width: 768px) {
+  .nav__menu {
+    display: flex;
+  }
+  .nav__toggle {
+    display: none;
+  }
+  .nav__mobile {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Pill Buttons (doc components)
+   Primary: white fill, black text, 9999px, shadow-lg.
+   Ghost: transparent, 1px white@50%, no shadow.
+   Inverted: linen fill, black text.
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(13px, 1.6vw, 15px);
+  letter-spacing: -0.30px;
+  border-radius: var(--radius-buttons);
+  padding: clamp(13px, 1.8vw, 16px) clamp(20px, 3vw, 24px);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  border: none;
+  white-space: nowrap;
+  text-align: center;
+}
+.btn svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* Pill Primary — white fill, black text, shadow-lg */
+.btn--primary {
+  background: var(--color-chalk);
+  color: var(--color-void-black);
+  box-shadow: var(--shadow-lg);
+}
+.btn--primary:hover {
+  background: var(--color-linen);
+}
+
+/* Pill Ghost — transparent, 1px white @ 50% */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-chalk);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.btn--ghost:hover {
+  border-color: var(--color-chalk);
+}
+
+/* Pill Inverted — linen fill, black text (for linen panel) */
+.btn--inverted {
+  background: var(--color-linen);
+  color: var(--color-void-black);
+}
+.btn--inverted:hover {
+  background: var(--color-chalk);
+}
+
+.btn__arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   Hero — cinematic full-bleed opening
+   Edge-to-edge image, 16:9+, single warm light source.
+   Centered Bradford headline overlaid. No radius, no border.
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 64px;
+  overflow: hidden;
+}
+
+/* Cinematic hero image — full-bleed, grayscale by default. */
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05) brightness(0.62);
+}
+
+/* Cinematic scrim — dark gradient so headline reads on top. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.6) 100%);
+}
+/* Subtle vignette — reinforces the "glowing subject in a void" */
+.hero__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(ellipse at 50% 42%, transparent 38%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding: 0 var(--gutter) clamp(56px, 8vw, 96px);
+}
+
+/* Eyebrow pill over the hero */
+.hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset;
+  border-radius: var(--radius-badges);
+  padding: 5px 11px;
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-chalk);
+  margin-bottom: var(--spacing-24);
+}
+
+/* Bradford display headline — fluid clamp, white */
+.hero__title {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(40px, 9vw, var(--text-display));
+  line-height: 1.02;
+  letter-spacing: clamp(-0.05em, -0.06vw, -0.02em);
+  color: var(--color-chalk);
+  max-width: 18ch;
+}
+
+.hero__sub {
+  margin-top: clamp(20px, 3vw, 32px);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: clamp(15px, 2vw, var(--text-body));
+  line-height: 1.55;
+  color: var(--color-bone);
+  max-width: 56ch;
+}
+
+.hero__actions {
+  margin-top: clamp(28px, 4vw, 40px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-12) var(--spacing-16);
+}
+
+.hero__meta {
+  margin-top: clamp(32px, 5vw, 64px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8) var(--spacing-32);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  color: var(--color-smoke);
+}
+.hero__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+.hero__meta span + span::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-smoke);
+  margin-right: var(--spacing-8);
+}
+@media (max-width: 480px) {
+  /* Stack meta vertically on very small screens — no dot separators */
+  .hero__meta {
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+  .hero__meta span + span::before {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Projects — alternating image-forward rows (gallery rhythm)
+   doc signature: Editorial Image Card — full-bleed photo, 10px
+   radius, shadow-xl, headline + meta overlaid bottom-left.
+   Each project = one row: image-forward card + detail column.
+   Alternation via :nth-child(even) reordering the media.
+   ============================================================ */
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 9vw, 96px);
+}
+
+.work {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 4vw, 32px);
+  align-items: center;
+}
+
+@media (min-width: 880px) {
+  .work {
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(32px, 5vw, 64px);
+  }
+  /* Alternate: even rows place the image on the right. */
+  .work:nth-child(even) .work__media {
+    order: 2;
+  }
+}
+
+/* Image-forward Editorial Image Card */
+.work__media {
+  position: relative;
+  border-radius: var(--radius-cards);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl); /* outer dark + inset white highlight */
+  aspect-ratio: 4 / 5;
+  background: var(--color-carbon);
+  transition: transform 0.3s ease;
+}
+@media (max-width: 879px) {
+  .work__media {
+    aspect-ratio: 4 / 5;
+    min-height: 420px;
+  }
+}
+@media (hover: hover) {
+  .work__media:hover {
+    transform: translateY(-3px);
+  }
+  /* Cinematic image scale on hover — image-led, on-spec. */
+  .work__media:hover .card__media img {
+    transform: scale(1.03);
+  }
+}
+
+/* Headline + hook overlaid bottom-left (doc Editorial Image Card) */
+.work__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: clamp(20px, 3vw, 32px);
+}
+.work__overlay .card__title {
+  font-size: clamp(24px, 3vw, var(--text-heading));
+}
+
+/* Hook — one-line meta under the overlaid title */
+.card__hook {
+  margin-top: var(--spacing-8);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  color: var(--color-bone);
+}
+
+/* Detail column — supporting text, left-aligned, narrow measure */
+.work__detail {
+  max-width: 480px;
+}
+@media (min-width: 880px) {
+  .work__detail {
+    /* Constrain detail even within its grid track for editorial measure */
+    width: 100%;
+  }
+}
+.work__detail .card__stack {
+  margin-top: 0;
+}
+.work__detail .card__desc {
+  margin-top: var(--spacing-16);
+}
+.work__detail .card__points {
+  margin-top: var(--spacing-20);
+}
+/* Even rows: push detail to the right edge to balance the flipped image */
+.work:nth-child(even) .work__detail {
+  justify-self: start;
+}
+
+.card__media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05) brightness(0.7);
+  transition: transform 0.4s ease; /* cinematic scale on .work__media:hover */
+}
+
+/* Card scrim for legibility */
+.card__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.15) 55%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+/* Pill Category Badge — top-right, rgba surface, inset highlight */
+.card__badge {
+  position: absolute;
+  top: var(--spacing-16);
+  right: var(--spacing-16);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset;
+  border-radius: var(--radius-badges);
+  padding: 5px 11px;
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-chalk);
+}
+
+.card__title {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(20px, 2.6vw, var(--text-subheading));
+  line-height: var(--leading-subheading);
+  letter-spacing: var(--tracking-subheading);
+  color: var(--color-chalk);
+}
+
+.card__stack {
+  margin-top: var(--spacing-12);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-smoke);
+  text-transform: uppercase;
+}
+
+.card__desc {
+  margin-top: var(--spacing-16);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+  color: var(--color-bone);
+}
+
+.card__points {
+  margin-top: var(--spacing-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+.card__points li {
+  position: relative;
+  padding-left: var(--spacing-16);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-ash);
+}
+.card__points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 1px;
+  background: var(--color-smoke);
+}
+
+/* ============================================================
+   Experience — two-column editorial rows
+   Anchored role/org/stack LEFT, bullet detail RIGHT. Breaks the
+   centered-list rhythm used by Education/Certifications. Achromatic.
+   ============================================================ */
+
+.exp-list {
+  max-width: 1080px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 7vw, 80px);
+}
+
+.exp {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-32);
+}
+
+@media (min-width: 880px) {
+  .exp {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(40px, 5vw, 72px);
+    align-items: start;
+  }
+}
+
+/* Left column — role, org, stack badges (anchored, left-aligned) */
+.exp__head {
+  position: relative;
+}
+@media (min-width: 880px) {
+  .exp__head {
+    /* Sticky anchor keeps the role in view while scanning bullets */
+    position: sticky;
+    top: 88px;
+  }
+}
+
+.exp__role {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(24px, 3.4vw, var(--text-heading));
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-chalk);
+}
+
+.exp__org {
+  margin-top: var(--spacing-12);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  color: var(--color-bone);
+}
+
+.exp__stack {
+  margin-top: var(--spacing-24);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.exp__points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+.exp__points li {
+  position: relative;
+  padding-left: var(--spacing-20);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  line-height: 1.6;
+  color: var(--color-bone);
+}
+.exp__points li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-smoke);
+}
+
+/* inline mono-ish accent for tech tokens — achromatic, italic */
+.exp__em {
+  font-style: italic;
+  color: var(--color-chalk);
+}
+
+/* ============================================================
+   Skills — Pill Category Badges (achromatic)
+   ============================================================ */
+
+.skill-group {
+  max-width: 820px;
+  margin-inline: auto;
+  text-align: center;
+  padding-block: clamp(32px, 4vw, 48px);
+}
+.skill-group + .skill-group {
+  border-top: 1px solid var(--color-graphite);
+}
+.skill-group__label {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+  margin-bottom: var(--spacing-24);
+}
+
+/* Reuse pill badge spec: rgba surface, inset highlight, 9999px */
+.skill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-8);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset;
+  border-radius: var(--radius-badges);
+  padding: 5px 11px;
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-chalk);
+  transition: background-color 0.15s ease;
+}
+.badge:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ============================================================
+   Education — centered editorial list
+   Mirrors the experience list pattern: centered, achromatic.
+   ============================================================ */
+
+.edu-list {
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+.edu {
+  text-align: center;
+}
+
+.edu__school {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(22px, 3vw, var(--text-heading));
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-chalk);
+}
+
+.edu__degree {
+  margin-top: var(--spacing-12);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  color: var(--color-bone);
+}
+
+.edu__meta {
+  margin-top: var(--spacing-8);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-caption);
+  letter-spacing: 0.04em;
+  color: var(--color-smoke);
+}
+
+/* ============================================================
+   Certifications — 2-up editorial grid
+   Text-only cards: NO radius, NO shadow (doc reserves those for
+   image cards / buttons). Hairline graphite padding block only.
+   Breaks rhythm vs the row-based Experience section above.
+   ============================================================ */
+
+.cert-grid {
+  max-width: 1000px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .cert-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cert {
+  padding: var(--spacing-32);
+  border-bottom: 1px solid var(--color-graphite);
+}
+/* Left column gets a right divider on desktop for the grid seam */
+@media (min-width: 768px) {
+  .cert:nth-child(odd) {
+    border-right: 1px solid var(--color-graphite);
+  }
+}
+.cert:nth-child(-n+2) {
+  border-top: 1px solid var(--color-graphite);
+}
+/* On mobile, only the first child shows a top border */
+@media (max-width: 767px) {
+  .cert:nth-child(-n+2) {
+    border-top: none;
+  }
+  .cert:first-child {
+    border-top: 1px solid var(--color-graphite);
+  }
+}
+
+.cert__title {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(18px, 2.5vw, var(--text-subheading));
+  line-height: var(--leading-subheading);
+  letter-spacing: var(--tracking-subheading);
+  color: var(--color-chalk);
+}
+
+.cert__issuer {
+  margin-top: var(--spacing-8);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  color: var(--color-smoke);
+}
+
+.cert__tags {
+  margin-top: var(--spacing-16);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+/* ============================================================
+   Metrics — achromatic quantified-credibility strip
+   Pure type on void black: no card, no shadow, no radius.
+   Values in Bradford 500 (the system's authority weight);
+   labels in VisueltPro 300 uppercase meta (matches .eyebrow).
+   ============================================================ */
+
+.metrics {
+  padding-block: clamp(48px, 6vw, 72px);
+  border-block: 1px solid var(--color-graphite);
+}
+.metrics__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .metrics__row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  align-items: center;
+}
+/* Hairline divider between metrics on desktop */
+@media (min-width: 768px) {
+  .metric + .metric {
+    border-left: 1px solid var(--color-graphite);
+  }
+}
+.metric__value {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(40px, 6vw, var(--text-heading-lg));
+  line-height: 1;
+  letter-spacing: var(--tracking-heading-lg);
+  color: var(--color-chalk);
+}
+.metric__label {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+  max-width: 22ch;
+}
+
+/* ============================================================
+   Inverted Light Panel (doc component)
+   Warm linen band, black text. One per page max.
+   ============================================================ */
+
+.panel {
+  background: var(--surface-linen);
+  color: var(--color-void-black);
+  padding-block: var(--section-pad);
+}
+.panel__inner {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+  padding-inline: var(--gutter);
+}
+.panel__eyebrow {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #555555;
+  margin-bottom: var(--spacing-24);
+}
+.panel__title {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(36px, 6vw, var(--text-heading-lg));
+  line-height: var(--leading-heading-lg);
+  letter-spacing: var(--tracking-heading-lg);
+  color: var(--color-void-black);
+}
+.panel__lead {
+  margin-top: var(--spacing-24);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  color: #333333;
+  max-width: 56ch;
+  margin-inline: auto;
+}
+.panel .btn {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+/* ============================================================
+   Footer — Logo Lockup + links
+   ============================================================ */
+
+.footer {
+  padding-block: var(--spacing-64) clamp(56px, 7vw, 96px);
+  border-top: 1px solid var(--color-graphite);
+}
+.footer__inner {
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+}
+.footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-regular);
+  font-size: clamp(16px, 2.5vw, 20px);
+  letter-spacing: -0.02em;
+  color: var(--color-chalk);
+}
+.footer__copy {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-caption);
+  color: var(--color-smoke);
+  letter-spacing: 0.02em;
+}
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-16) var(--spacing-24);
+}
+.footer__link {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  color: var(--color-bone);
+  transition: color 0.15s ease;
+}
+.footer__link:hover {
+  color: var(--color-chalk);
+}
+@media (max-width: 560px) {
+  .footer__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-20);
+  }
+}
+
+/* ============================================================
+   Motion — fade-up reveal (doc: image cards + headlines)
+   Respect reduced-motion.
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal[data-delay="1"] { transition-delay: 0.08s; }
+.reveal[data-delay="2"] { transition-delay: 0.16s; }
+.reveal[data-delay="3"] { transition-delay: 0.24s; }
+.reveal[data-delay="4"] { transition-delay: 0.32s; }
+
+/* ============================================================
+   Contact Modal — Formspree-powered contact form
+   Dark carbon surface, 10px radius, shadow-xl (floating surface).
+   Reuses pill button + eyebrow spec. 100% achromatic.
+   ============================================================ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300; /* above nav (100) + skip-link (200) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+}
+.modal[hidden] { display: none; } /* override .modal's display:flex */
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.modal.is-open .modal__backdrop { opacity: 1; }
+
+.modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--surface-carbon);
+  color: var(--color-chalk);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--radius-lg); /* 10px containers */
+  box-shadow: var(--shadow-xl);    /* floating surface — on-spec */
+  padding: clamp(24px, 4vw, 40px);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.modal.is-open .modal__panel { opacity: 1; transform: translateY(0); }
+
+/* Close control — round ghost pill, top-right */
+.modal__close {
+  position: absolute;
+  top: var(--spacing-16);
+  right: var(--spacing-16);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-graphite);
+  color: var(--color-bone);
+  font-size: 22px;
+  line-height: 1;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+.modal__close:hover {
+  color: var(--color-chalk);
+  border-color: var(--color-chalk);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.modal__head { margin-bottom: var(--spacing-28); }
+.modal__eyebrow {
+  display: inline-block;
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+  margin-bottom: var(--spacing-16);
+}
+.modal__title {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(28px, 5vw, var(--text-heading));
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-chalk);
+}
+.modal__lead {
+  margin-top: var(--spacing-12);
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+  color: var(--color-bone);
+}
+
+/* Form fields — extrapolated: 10px radius, 1px graphite border, 300-weight. */
+.contact-form { display: flex; flex-direction: column; gap: var(--spacing-20); }
+.field { display: flex; flex-direction: column; gap: var(--spacing-8); }
+.field__label {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+}
+.field__input {
+  width: 100%;
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  line-height: 1.5;
+  color: var(--color-chalk);
+  background: var(--surface-void);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  transition: border-color 0.15s ease;
+}
+.field__input::placeholder { color: var(--color-smoke); }
+.field__input:focus { outline: none; border-color: var(--color-chalk); }
+/* The global achromatic :focus-visible ring still applies for keyboard users. */
+.field__input--area { resize: vertical; min-height: 120px; }
+
+.contact-form__submit { align-self: flex-start; margin-top: var(--spacing-4); }
+@media (max-width: 480px) {
+  .contact-form__submit { align-self: stretch; width: 100%; }
+}
+
+/* Formspree honeypot — off-screen, reachable to bots only */
+.contact-form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Contact Modal — Enhancement layer
+   Two-col field rows, required markers, char counter, achromatic
+   inline validation, sending state, success view.
+   All signals via border weight + glyphs + typography (no hue).
+   ============================================================ */
+
+/* Field-row: paired columns ≥640px, stacked on mobile */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-20);
+}
+@media (min-width: 640px) {
+  .field-row { grid-template-columns: 1fr 1fr; }
+}
+
+/* Required marker — smoke asterisk */
+.field__req {
+  color: var(--color-smoke);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Meta row: error left, counter right (message field only) */
+.field__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--spacing-12);
+  min-height: 1em;
+}
+
+/* Error text — 12px italic smoke; empty by default, chalk when invalid */
+.field__error {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--color-smoke);
+  line-height: 1.4;
+  margin: 0;
+  min-height: 1em;
+}
+.field.is-invalid .field__error {
+  color: var(--color-chalk);
+}
+
+/* Invalid state — border bumped to 2px chalk (weight signal, not hue) */
+.field.is-invalid .field__input {
+  border-color: var(--color-chalk);
+  border-width: 2px;
+}
+
+/* Character counter — 11px smoke, right-aligned */
+.field__counter {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--color-smoke);
+  text-align: right;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Status announcer — 13px italic smoke (sending / validation feedback) */
+.contact-form__status {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-smoke);
+  line-height: 1.4;
+  margin: 0;
+  min-height: 0;
+}
+
+/* Sending state — double-submit guard */
+.contact-form__submit.is-sending {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Contact Success View — achromatic confirmation
+   Line-glyph checkmark, Bradford title, microcopy, ghost close.
+   ============================================================ */
+
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-16);
+  padding-block: var(--spacing-32);
+}
+.contact-success[hidden] { display: none; }
+
+/* Checkmark circle — 56px round, graphite border, line-glyph on-spec */
+.contact-success__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-graphite);
+  background: var(--surface-void);
+}
+.contact-success__mark svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--color-chalk);
+}
+
+/* Bradford title + lead — matches existing type scale */
+.contact-success__title {
+  font-family: var(--font-bradford);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(24px, 4vw, var(--text-heading));
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-chalk);
+}
+.contact-success__lead {
+  font-family: var(--font-visueltpro);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+  color: var(--color-bone);
+  max-width: 40ch;
+}
+
+/* Close button in success — inherits .btn--ghost */
+.contact-success__close { margin-top: var(--spacing-8); }
+
+/* ============================================================
+   Small-screen typography tightening
+   ============================================================ */
+@media (max-width: 640px) {
+  :root {
+    --text-body: 16px;
+  }
+  .hero__sub {
+    max-width: none;
+  }
+}
